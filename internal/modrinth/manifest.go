@@ -1,4 +1,4 @@
-package internal
+package modrinth
 
 import (
 	"encoding/json"
@@ -25,7 +25,7 @@ type ManifestDependencies struct {
 
 type ManifestFile struct {
 	Path      string              `json:"path"`
-	FileSize  uint                `json:"file_size"`
+	FileSize  int64               `json:"fileSize"`
 	Downloads []string            `json:"downloads"`
 	Hashes    *ManifestFileHashes `json:"hashes"`
 	Env       *ManifestFileEnv    `json:"env,omitempty"`

@@ -1,4 +1,4 @@
-package internal
+package modrinth
 
 import "testing"
 import "github.com/spf13/afero"
