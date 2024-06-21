@@ -36,6 +36,7 @@ jobs:
         goarch: ['amd64', 'arm64']
 
     steps:
+      - uses: actions/checkout@v4
       - name: Setup Go ${{ matrix.go-version }}
         uses: actions/setup-go@v5
         with:
