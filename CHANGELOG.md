@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/AnthonyPorthouse/mr-packer/compare/v1.0.0...v1.0.1) (2024-06-21)
+
+
+### Bug Fixes
+
+* correct building ([9810880](https://github.com/AnthonyPorthouse/mr-packer/commit/9810880a4c5921fb0dcfb7ed27435f68e1f65473))
+
 ## 1.0.0 (2024-06-21)
 
 
