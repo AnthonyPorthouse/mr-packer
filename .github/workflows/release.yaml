@@ -1,0 +1,51 @@
+on:
+  push:
+    branches:
+      - main
+  
+permissions:
+  contents: write
+  pull-requests: write
+  
+name: release-please
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          release-type: go
+    
+    outputs:
+      release-created: ${{ steps.release.outputs.release_created }}
+      tag-name: ${{ steps.release.outputs.tag_name }}
+
+  
+  build:
+    needs: release-please
+    runs-on: ubuntu-latest
+
+    if: ${{ needs.release-please.outputs.release-created }}
+
+    strategy:
+      matrix:
+        go-version: [ '1.21.x' ]
+        goos: ['linux', 'windows', 'darwin']
+        goarch: ['amd64', 'arm64']
+
+    steps:
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Build ${{ matrix.goos }} ${{ matrix.goarch }}
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -o mr-packer-${{ matrix.goos }}-${{ matrix.goarch}} ./cmd/mr-packer
+      - name: Upload Release Artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ needs.release-please.outputs.tag-name }} mr-packer-${{ matrix.goos }}-${{ matrix.goarch}}
