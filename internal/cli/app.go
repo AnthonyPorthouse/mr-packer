@@ -22,10 +22,14 @@ func MakeApp() *cli.App {
 
 					appFs := afero.NewOsFs()
 
-					manifest, err := modrinth.ValidateFile(ctx.Args().First(), appFs)
+					archivePath := ctx.Args().First()
+
+					manifest, err := modrinth.ValidateFile(archivePath, appFs)
 					if err != nil {
 						return err
 					}
+
+					modrinth.ExtractOverrides(archivePath, modrinth.Client, appFs)
 
 					err = modrinth.DownloadFiles(manifest, modrinth.Client, appFs)
 					if err != nil {
