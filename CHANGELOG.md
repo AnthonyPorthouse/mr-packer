@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/AnthonyPorthouse/mr-packer/compare/v1.0.1...v1.0.2) (2024-06-21)
+
+
+### Bug Fixes
+
+* fix build action ([3d6691b](https://github.com/AnthonyPorthouse/mr-packer/commit/3d6691b857dd81fc5a55f1a6e0a22f4f89838029))
+* include .go on build ([17484cd](https://github.com/AnthonyPorthouse/mr-packer/commit/17484cd85819af424b1fa072f28d857d29361680))
+
 ## [1.0.1](https://github.com/AnthonyPorthouse/mr-packer/compare/v1.0.0...v1.0.1) (2024-06-21)
 
 
